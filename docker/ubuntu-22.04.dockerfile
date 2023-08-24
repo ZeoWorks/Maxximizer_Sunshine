@@ -75,17 +75,7 @@ WORKDIR /build/sunshine/build
 RUN <<_MAKE
 #!/bin/bash
 set -e
-cmake \
-  -DCMAKE_CUDA_COMPILER:PATH=/build/cuda/bin/nvcc \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX=/usr \
-  -DSUNSHINE_ASSETS_DIR=share/sunshine \
-  -DSUNSHINE_EXECUTABLE_PATH=/usr/bin/sunshine \
-  -DSUNSHINE_ENABLE_WAYLAND=ON \
-  -DSUNSHINE_ENABLE_X11=ON \
-  -DSUNSHINE_ENABLE_DRM=ON \
-  -DSUNSHINE_ENABLE_CUDA=ON \
-  /build/sunshine
+cmake -DCMAKE_C_COMPILER=gcc-10 -DCMAKE_CXX_COMPILER=g++-10 ..
 make -j "$(nproc)"
 cpack -G DEB
 _MAKE
