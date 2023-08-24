@@ -59,7 +59,6 @@ apt-get install -y --no-install-recommends \
   libxrandr-dev \
   libxtst-dev \
   nodejs \
-  npm \
   wget
 if [[ "${TARGETPLATFORM}" == 'linux/amd64' ]]; then
   apt-get install -y --no-install-recommends \
@@ -94,9 +93,6 @@ _INSTALL_CUDA
 # copy repository
 WORKDIR /build/sunshine/
 COPY --link .. .
-
-# setup npm dependencies
-RUN npm install
 
 # setup build directory
 WORKDIR /build/sunshine/build
