@@ -33,32 +33,28 @@ apt-get install -y --no-install-recommends \
   build-essential \
   cmake=3.22.* \
   git \
-  libappindicator3-dev \
-  libavdevice-dev \
-  libboost-filesystem-dev=1.74.* \
-  libboost-locale-dev=1.74.* \
-  libboost-log-dev=1.74.* \
-  libboost-program-options-dev=1.74.* \
-  libboost-thread-dev=1.74.* \
-  libcap-dev \
-  libcurl4-openssl-dev \
-  libdrm-dev \
-  libevdev-dev \
-  libnuma-dev \
-  libopus-dev \
-  libpulse-dev \
+  gcc-10 \
+  g++-10 \
   libssl-dev \
-  libva-dev \
-  libvdpau-dev \
-  libwayland-dev \
+  libavdevice-dev \
+  libboost-thread-dev \
+  libboost-filesystem-dev \
+  libboost-log-dev \
+  libpulse-dev \
+  libopus-dev \
+  libevdev-dev \
+  libxtst-dev \
   libx11-dev \
+  libxrandr-dev \
+  libxfixes-dev \
+  libxcb1-dev \
   libxcb-shm0-dev \
   libxcb-xfixes0-dev \
-  libxcb1-dev \
-  libxfixes-dev \
-  libxrandr-dev \
-  libxtst-dev \
-  nodejs \
+  libdrm-dev \
+  libcap-dev \
+  libwayland-dev \
+  nvidia-cuda-dev \
+  nvidia-cuda-toolkit \
   wget
 if [[ "${TARGETPLATFORM}" == 'linux/amd64' ]]; then
   apt-get install -y --no-install-recommends \
@@ -67,28 +63,6 @@ fi
 apt-get clean
 rm -rf /var/lib/apt/lists/*
 _DEPS
-
-# install cuda
-WORKDIR /build/cuda
-# versions: https://developer.nvidia.com/cuda-toolkit-archive
-ENV CUDA_VERSION="11.8.0"
-ENV CUDA_BUILD="520.61.05"
-# hadolint ignore=SC3010
-RUN <<_INSTALL_CUDA
-#!/bin/bash
-set -e
-cuda_prefix="https://developer.download.nvidia.com/compute/cuda/"
-cuda_suffix=""
-if [[ "${TARGETPLATFORM}" == 'linux/arm64' ]]; then
-  cuda_suffix="_sbsa"
-fi
-url="${cuda_prefix}${CUDA_VERSION}/local_installers/cuda_${CUDA_VERSION}_${CUDA_BUILD}_linux${cuda_suffix}.run"
-echo "cuda url: ${url}"
-wget "$url" --progress=bar:force:noscroll -q --show-progress -O ./cuda.run
-chmod a+x ./cuda.run
-./cuda.run --silent --toolkit --toolkitpath=/build/cuda --no-opengl-libs --no-man-page --no-drm
-rm ./cuda.run
-_INSTALL_CUDA
 
 # copy repository
 WORKDIR /build/sunshine/
