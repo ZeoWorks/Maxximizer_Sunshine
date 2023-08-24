@@ -513,6 +513,10 @@ int vaapi_make_hwdevice_ctx(platf::hwdevice_t *base, AVBufferRef **hw_device_buf
   });
 
   va::display_t display { va::getDisplayDRM(fd) };
+
+  auto render_device = config::video.adapter_name.empty() ? "/dev/dri/renderD129" : config::video.adapter_name.c_str();
+    BOOST_LOG(debug) << "Device used: "sv << render_device;
+  
   if(!display) {
     auto render_device = config::video.adapter_name.empty() ? "/dev/dri/renderD129" : config::video.adapter_name.c_str();
 
