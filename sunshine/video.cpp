@@ -1648,7 +1648,7 @@ retry:
 int init() {
   BOOST_LOG(info) << "//////////////////////////////////////////////////////////////////"sv;
   BOOST_LOG(info) << "//                                                              //"sv;
-  BOOST_LOG(info) << "//   Testing for available encoders, this may generate errors.  //"sv;
+  BOOST_LOG(info) << "//   Testing for available encoders.  //"sv;
   BOOST_LOG(info) << "//   You can safely ignore those errors.                        //"sv;
   BOOST_LOG(info) << "//                                                              //"sv;
   BOOST_LOG(info) << "//////////////////////////////////////////////////////////////////"sv;
