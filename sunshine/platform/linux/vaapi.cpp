@@ -619,6 +619,7 @@ std::shared_ptr<platf::hwdevice_t> make_hwdevice(int width, int height, file_t &
   if(vram) {
     auto egl = std::make_shared<va::va_vram_t>();
     if(egl->init(width, height, std::move(card), offset_x, offset_y)) {
+      BOOST_LOG(info) << "Failed to load card";
       return nullptr;
     }
 
@@ -628,6 +629,7 @@ std::shared_ptr<platf::hwdevice_t> make_hwdevice(int width, int height, file_t &
   else {
     auto egl = std::make_shared<va::va_ram_t>();
     if(egl->init(width, height, std::move(card))) {
+       BOOST_LOG(info) << "Failed to load card";
       return nullptr;
     }
 
