@@ -1,2 +1,0 @@
-/media/sean/Data/MaximumSettings/Linux_Sunshine/sunshine/build/CMakeFiles/CheckCUDA/CMakeFiles/edit_cache.dir
-/media/sean/Data/MaximumSettings/Linux_Sunshine/sunshine/build/CMakeFiles/CheckCUDA/CMakeFiles/rebuild_cache.dir

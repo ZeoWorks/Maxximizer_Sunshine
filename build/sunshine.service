@@ -1,8 +1,0 @@
-[Unit]
-Description=Sunshine is a Gamestream host for Moonlight.
-
-[Service]
-ExecStart=sunshine
-
-[Install]
-WantedBy=graphical-session.target
