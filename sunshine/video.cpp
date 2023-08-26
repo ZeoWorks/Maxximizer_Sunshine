@@ -1741,13 +1741,13 @@ util::Either<buffer_t, int> vaapi_make_hwdevice_ctx(platf::hwdevice_t *base) {
   buffer_t hw_device_buf;
 
   // If an egl hwdevice
-  //if(base->data) {
-    //if(((vaapi_make_hwdevice_ctx_fn)base->data)(base, &hw_device_buf)) {
+  if(base->data) {
+    if(((vaapi_make_hwdevice_ctx_fn)base->data)(base, &hw_device_buf)) {
       //return -1;
-   // }
+    }
 
     //return hw_device_buf;
-  //}
+  }
 
   auto render_device =  config::video.adapter_name.empty() ? "/dev/dri/renderD128" : config::video.adapter_name.c_str();
 BOOST_LOG(info) << "Trying render device ["sv << render_device << ']';
