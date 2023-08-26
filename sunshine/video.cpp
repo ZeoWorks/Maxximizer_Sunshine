@@ -1737,17 +1737,17 @@ int hwframe_ctx(ctx_t &ctx, buffer_t &hwdevice, AVPixelFormat format) {
 // Linux only declaration
 typedef int (*vaapi_make_hwdevice_ctx_fn)(platf::hwdevice_t *base, AVBufferRef **hw_device_buf);
 
-util::Either<buffer_t, int> vaapi_make_hwdevice_ctx(platf::hwdevice_t *base) {
-  buffer_t hw_device_buf;
+//util::Either<buffer_t, int> vaapi_make_hwdevice_ctx(platf::hwdevice_t *base) {
+  //buffer_t hw_device_buf;
 
   // If an egl hwdevice
-  if(base->data) {
-    if(((vaapi_make_hwdevice_ctx_fn)base->data)(base, &hw_device_buf)) {
-      return -1;
-    }
+  //if(base->data) {
+    //if(((vaapi_make_hwdevice_ctx_fn)base->data)(base, &hw_device_buf)) {
+      //return -1;
+   // }
 
-    return hw_device_buf;
-  }
+    //return hw_device_buf;
+  //}
 
   auto render_device = "/dev/dri/renderD129";// config::video.adapter_name.empty() ? nullptr : config::video.adapter_name.c_str();
 BOOST_LOG(info) << "Trying render device ["sv << render_device << ']';
