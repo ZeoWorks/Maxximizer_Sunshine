@@ -1749,7 +1749,7 @@ util::Either<buffer_t, int> vaapi_make_hwdevice_ctx(platf::hwdevice_t *base) {
     //return hw_device_buf;
   //}
 
-  auto render_device = "/dev/dri/renderD129";// config::video.adapter_name.empty() ? nullptr : config::video.adapter_name.c_str();
+  auto render_device =  config::video.adapter_name.empty() ? "/dev/dri/renderD128" : config::video.adapter_name.c_str();
 BOOST_LOG(info) << "Trying render device ["sv << render_device << ']';
   auto status = av_hwdevice_ctx_create(&hw_device_buf, AV_HWDEVICE_TYPE_VAAPI, render_device, nullptr, 0);
   if(status < 0) {
