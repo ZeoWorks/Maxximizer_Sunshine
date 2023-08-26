@@ -1735,31 +1735,34 @@ int hwframe_ctx(ctx_t &ctx, buffer_t &hwdevice, AVPixelFormat format) {
 }
 
 // Linux only declaration
-typedef int (*vaapi_make_hwdevice_ctx_fn)(platf::hwdevice_t *base, AVBufferRef **hw_device_buf);
+//typedef int (*vaapi_make_hwdevice_ctx_fn)(platf::hwdevice_t *base, AVBufferRef **hw_device_buf);
 
-util::Either<buffer_t, int> vaapi_make_hwdevice_ctx(platf::hwdevice_t *base) {
-  buffer_t hw_device_buf;
+//util::Either<buffer_t, int> vaapi_make_hwdevice_ctx(platf::hwdevice_t *base) {
+//  buffer_t hw_device_buf;
 
   // If an egl hwdevice
-  if(base->data) {
-    if(((vaapi_make_hwdevice_ctx_fn)base->data)(base, &hw_device_buf)) {
-      BOOST_LOG(info) << "Lemons";
-      return -1;
-    }
+//  if(base->data) {
+//    if(((vaapi_make_hwdevice_ctx_fn)base->data)(base, &hw_device_buf)) {
+//      BOOST_LOG(info) << "Lemons";
+//      return -1;
+//    }
     return hw_device_buf;
-  }
+//  }
 
-  auto render_device =  config::video.adapter_name.empty() ? "/dev/dri/renderD128" : config::video.adapter_name.c_str();
-BOOST_LOG(info) << "Trying render device ["sv << render_device << ']';
-  auto status = av_hwdevice_ctx_create(&hw_device_buf, AV_HWDEVICE_TYPE_VAAPI, render_device, nullptr, 0);
-  if(status < 0) {
-    char string[AV_ERROR_MAX_STRING_SIZE];
-    BOOST_LOG(error) << "Failed to create a VAAPI device: "sv << av_make_error_string(string, AV_ERROR_MAX_STRING_SIZE, status);
-    return -1;
-  }
+//  auto render_device =  config::video.adapter_name.empty() ? "/dev/dri/renderD128" : config::video.adapter_name.c_str();
+//BOOST_LOG(info) << "Trying render device ["sv << render_device << ']';
+//  auto status = av_hwdevice_ctx_create(&hw_device_buf, AV_HWDEVICE_TYPE_VAAPI, render_device, nullptr, 0);
+ // if(status < 0) {
+ //   char string[AV_ERROR_MAX_STRING_SIZE];
+//    BOOST_LOG(error) << "Failed to create a VAAPI device: "sv << av_make_error_string(string, AV_ERROR_MAX_STRING_SIZE, status);
+//    return -1;
+//  }
 
-  return hw_device_buf;
-}
+//  return hw_device_buf;
+//}
+buffer_t hw_device_buf;
+av_hwdevice_ctx_create(&hw_device_buf, AV_HWDEVICE_TYPE_VAAPI, render_device, nullptr, 0);
+return hw_device_buf;
 
 util::Either<buffer_t, int> cuda_make_hwdevice_ctx(platf::hwdevice_t *base) {
   buffer_t hw_device_buf;
