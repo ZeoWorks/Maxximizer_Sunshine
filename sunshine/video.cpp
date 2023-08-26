@@ -1746,10 +1746,6 @@ util::Either<buffer_t, int> vaapi_make_hwdevice_ctx(platf::hwdevice_t *base) {
       BOOST_LOG(info) << "Lemons";
       return -1;
     }
-
-    auto render_device =  config::video.adapter_name.empty() ? "/dev/dri/renderD128" : config::video.adapter_name.c_str();
-BOOST_LOG(info) << "First try ["sv << render_device << ']';
-  auto status = av_hwdevice_ctx_create(&hw_device_buf, AV_HWDEVICE_TYPE_VAAPI, render_device, nullptr, 0);
     return hw_device_buf;
   }
 
