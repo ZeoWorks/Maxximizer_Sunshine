@@ -1737,8 +1737,8 @@ int hwframe_ctx(ctx_t &ctx, buffer_t &hwdevice, AVPixelFormat format) {
 // Linux only declaration
 typedef int (*vaapi_make_hwdevice_ctx_fn)(platf::hwdevice_t *base, AVBufferRef **hw_device_buf);
 
-//util::Either<buffer_t, int> vaapi_make_hwdevice_ctx(platf::hwdevice_t *base) {
-  //buffer_t hw_device_buf;
+util::Either<buffer_t, int> vaapi_make_hwdevice_ctx(platf::hwdevice_t *base) {
+  buffer_t hw_device_buf;
 
   // If an egl hwdevice
   //if(base->data) {
